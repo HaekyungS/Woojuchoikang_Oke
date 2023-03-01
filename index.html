@@ -1,12 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+  </style>
 </head>
+
 <body>
-  
+  <script src="./common.js"></script>
+  <script>
+
+    document.body.style.margin = "0";
+    //body에 마진 없애기
+    CreateDocument("div", document.body);
+    //body 자식으로 div 생성
+
+    const Body_Div = document.body.children[2];
+    DocumentStyle(Body_Div, "412px", "915px");
+    DisplayStyle(Body_Div, "flex", "column", "center");
+    Background(Body_Div, "#CEF6CE");
+    //div에 스타일 추가
+
+    //여기는 header부분
+    CreateDocument("header", Body_Div);
+    const Header = Body_Div.children[0];
+    DocumentStyle(Header, "100%", "10%");
+    Header.style.borderBottom = "0.5px dotted #2EFE64";
+    FontStyle(Header, "", "", "", "", "center");
+    Header.innerHTML = "<h1>😝UJUCHOIKANG 옥이❗</h1>"
+
+
+    // 여긴 main 부분
+    CreateDocument("main", Body_Div);
+    const Main = Body_Div.children[1];
+    DocumentStyle(Main, "100%", "90%");
+    DisplayStyle(Main, "flex", "", "center", "wrap")
+
+
+    for (i = 0; i < 8; i++) {
+      CreateDocument("div", Main);
+      const PhotoDiv = Main.children[i];
+      DocumentStyle(PhotoDiv, "40%", "20%");
+      Background(PhotoDiv, "#81F7D8");
+      SpaceStyle(PhotoDiv, "", "auto", "", "hidden");
+      DisplayStyle(PhotoDiv, "flex", "", "center")
+      PhotoDiv.style.borderRadius = "60% 30%"
+      PhotoDiv.innerHTML = "무슨 사진이 있을까요 눌러보세용"
+      //요 글씨를 대각선으로 해서 커피콩 모양으로 만들고싶음.
+      let count = 0;
+      PhotoDiv.addEventListener("click", function () {
+        count += 1;
+        if (count % 2 === 1) {
+          Background(PhotoDiv, "", "url(./사진/사진" + [i] + ".jpg)","cover");
+          // PhotoDiv.style.transform="scale(5)"
+        } else if (count % 2 === 0) {
+          Background(PhotoDiv, "#81F7D8","");
+        }
+      })
+      //문제1. 사진이 for 마지막인 8만 뜸. 근데 왜 8이냐 7이여야지
+      //문제2. 스케일을 키워서 가운데로 사진이 전체화면으로 뜨게 어캐하징. 스케일..?
+      //문제3. 글씨... 대각선 가운데정렬...
+    }
+
+    // PhotoDiv
+
+    //누르면 스케일이 커지면서 백그라운드가 이미지로 바뀌고 다시 누르면 원래대로.
+    //메인에 8컷으로 쪼개서 누르면 사진이 나와서 확대돼었다가 다시 누르면 줄어들게.
+    //이건 addEventListener로 하면 되지 않으까
+
+  </script>
 </body>
+
 </html>
