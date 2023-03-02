@@ -15,7 +15,7 @@ function DocumentStyle(tag, widthValue, heightValue) {
 // DocumentStyle(div,"40px","40px")
 // index에서 변수선언해서 tag로 써도 적용됨~
 
-function DisplayStyle(tag, Display, DisplayDirec, JustifyContent, FlexWrap) {
+function DisplayStyle(tag, Display, DisplayDirec, JustifyContent, FlexWrap, ZIndex) {
   tag.style.display = Display;
   if (DisplayDirec !== undefined) {
     tag.style.flexDirection = DisplayDirec;
@@ -25,6 +25,9 @@ function DisplayStyle(tag, Display, DisplayDirec, JustifyContent, FlexWrap) {
   }
   if (FlexWrap !== undefined) {
     tag.style.flexWrap = FlexWrap;
+  }
+  if (ZIndex !== undefined) {
+    tag.style.zIndex = ZIndex;
   }
 }
 // DisplayStyle(div,"flex","","center")
@@ -63,14 +66,14 @@ function FontStyle(tag, FontFamily, FontSize, Color, FontWeight, TextAlign, Text
   }
 }//폰트설정
 
-function SpaceStyle(tag, Border, Margin,Padding,OverFlow) {
+function SpaceStyle(tag, Border, Margin, Padding, OverFlow) {
   if (Border !== undefined) {
     tag.style.border = Border;
   } if (Margin !== undefined) {
     tag.style.margin = Margin;
-  } if(Padding!==undefined){
-    tag.style.padding=Padding;
-  } if (OverFlow!==undefined){
-    tag.style.overflow=OverFlow;
+  } if (Padding !== undefined) {
+    tag.style.padding = Padding;
+  } if (OverFlow !== undefined) {
+    tag.style.overflow = OverFlow;
   }
 }//
