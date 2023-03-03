@@ -46,10 +46,12 @@
 
 
     for (i = 0; i < 8; i++) {
-      CreateDocument("div", Main);
+      CreateDocument("div", Main,"data-img","./사진/사진"+[i]+".jpg");
+      //div 생성 과정에서 data-img 라는 이름으로 dataset 생성. 이름은 사진이름으로.
+
       const PhotoDiv = Main.children[i];
       DocumentStyle(PhotoDiv, "40%", "20%");
-      Background(PhotoDiv, "#81F7D8");
+      Background(PhotoDiv, "#81F7D8","","cover");
       SpaceStyle(PhotoDiv, "", "auto", "", "hidden");
       DisplayStyle(PhotoDiv, "flex", "column", "center", "", 2);
       FontStyle(PhotoDiv, "'Dongle'", "", "", "", "center");
@@ -59,25 +61,28 @@
       PhotoDiv.children[0].style.height = "30px"
       PhotoDiv.children[0].style.transform = "skewY(-40deg)"
 
-      let count = 0;
-      PhotoDiv.addEventListener("click", function () {
-        count += 1;
-        if (count % 2 === 1) {
-          console.dir(Main)
-          Background(PhotoDiv, "", "url(./사진/사진" + [i] + ".jpg)", "cover");
-          PhotoDiv.style.zIndex = 1;
-          PhotoDiv.children[0].style.display = "none"
-          // 다른애들이 다 히든으로 없어지고 하나만 DIV 100%하면 될거같은데 그걸 어캐하지
+      let SwitchButtom=true;
 
-        } else if (count % 2 === 0) {
+      PhotoDiv.addEventListener("click", function () {
+        if (SwitchButtom === true) {
+          Background(PhotoDiv, "", "url("+this.dataset.img+")", "cover");
+          //클릭하면 해당 데이터셋을 불러오게.
+          PhotoDiv.style.zIndex = 1;
+          PhotoDiv.children[0].style.display = "none";
+          SwitchButtom=false;
+        } else if (SwitchButtom === false) {
           Background(PhotoDiv, "#81F7D8", "");
           PhotoDiv.style.zIndex = 2;
-          DisplayStyle(PhotoDiv.children[0], "flex", "", "center")
+          DisplayStyle(PhotoDiv.children[0], "flex", "", "center");
+          SwitchButtom=true;
         }
-      })
-      //문제1. 사진이 for 마지막인 8만 뜸. 근데 왜 8이냐 7이여야지
-      //문제2. 스케일을 키워서 가운데로 사진이 전체화면으로 뜨게 어캐하징. 스케일..?
+      }
+      )//dataset
     }
+    //문제1. 사진이 for 마지막인 8만 뜸. 근데 왜 8이냐 7이여야지
+    //문제2. 스케일을 키워서 가운데로 사진이 전체화면으로 뜨게 어캐하징. 스케일..?
+
+    console.dir(Main)
 
     // PhotoDiv
 
